@@ -20,6 +20,7 @@
       }
     ],
     "paths": {
+      "@schema": ["./schema"],
       "@/components/*": ["components/*"],
       "@/data/*": ["data/*"],
       "@/layouts/*": ["layouts/*"],
