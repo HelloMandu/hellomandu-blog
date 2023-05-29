@@ -17,7 +17,8 @@ const Utterances = () => {
     setEnabledLoadComments(false)
     const script = document.createElement('script')
     script.src = 'https://utteranc.es/client.js'
-    script.setAttribute('repo', siteMetadata.comment.utterancesConfig.repo)
+    siteMetadata.comment.utterancesConfig.repo &&
+      script.setAttribute('repo', siteMetadata.comment.utterancesConfig.repo)
     script.setAttribute('issue-term', siteMetadata.comment.utterancesConfig.issueTerm)
     script.setAttribute('label', siteMetadata.comment.utterancesConfig.label)
     script.setAttribute('theme', commentsTheme)
