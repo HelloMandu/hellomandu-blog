@@ -1,7 +1,8 @@
 import Image from './Image'
 import Link from './Link'
+import { Project } from '@schema'
 
-const Card = ({ title, description, imgSrc, href }) => (
+const Card = ({ title, description, imgSrc, href }: Project) => (
   <div className="md p-4 md:w-1/2" style={{ maxWidth: '544px' }}>
     <div
       className={`${

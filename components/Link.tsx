@@ -1,7 +1,10 @@
-/* eslint-disable jsx-a11y/anchor-has-content */
 import Link from 'next/link'
+import { ComponentProps } from 'react'
 
-const CustomLink = ({ href, ...rest }) => {
+const CustomLink = ({ href, ...rest }: ComponentProps<typeof Link>) => {
+  if (typeof href !== 'string') {
+    throw new Error('href must be string')
+  }
   const isInternalLink = href && href.startsWith('/')
   const isAnchorLink = href && href.startsWith('#')
 

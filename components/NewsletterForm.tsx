@@ -1,19 +1,19 @@
-import { useRef, useState } from 'react'
+import { ComponentProps, FormEvent, useRef, useState } from 'react'
 
 import siteMetadata from '@/data/siteMetadata'
 
 const NewsletterForm = ({ title = 'Subscribe to the newsletter' }) => {
-  const inputEl = useRef(null)
+  const inputEl = useRef<HTMLInputElement>(null)
   const [error, setError] = useState(false)
   const [message, setMessage] = useState('')
   const [subscribed, setSubscribed] = useState(false)
 
-  const subscribe = async (e) => {
+  const subscribe = async (e: FormEvent) => {
     e.preventDefault()
 
     const res = await fetch(`/api/${siteMetadata.newsletter.provider}`, {
       body: JSON.stringify({
-        email: inputEl.current.value,
+        email: inputEl.current?.value,
       }),
       headers: {
         'Content-Type': 'application/json',
@@ -28,7 +28,9 @@ const NewsletterForm = ({ title = 'Subscribe to the newsletter' }) => {
       return
     }
 
-    inputEl.current.value = ''
+    if (inputEl.current?.value !== undefined) {
+      inputEl.current.value = ''
+    }
     setError(false)
     setSubscribed(true)
     setMessage('Successfully! 🎉 You are now subscribed.')
@@ -75,7 +77,7 @@ const NewsletterForm = ({ title = 'Subscribe to the newsletter' }) => {
 
 export default NewsletterForm
 
-export const BlogNewsletterForm = ({ title }) => (
+export const BlogNewsletterForm = ({ title }: ComponentProps<typeof NewsletterForm>) => (
   <div className="flex items-center justify-center">
     <div className="bg-gray-100 p-6 dark:bg-gray-800 sm:px-14 sm:py-8">
       <NewsletterForm title={title} />

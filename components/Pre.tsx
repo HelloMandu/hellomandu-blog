@@ -1,7 +1,7 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, PropsWithChildren } from 'react'
 
-const Pre = (props) => {
-  const textInput = useRef(null)
+const Pre = ({ children }: PropsWithChildren) => {
+  const textInput = useRef<HTMLDivElement>(null)
   const [hovered, setHovered] = useState(false)
   const [copied, setCopied] = useState(false)
 
@@ -14,7 +14,7 @@ const Pre = (props) => {
   }
   const onCopy = () => {
     setCopied(true)
-    navigator.clipboard.writeText(textInput.current.textContent)
+    navigator.clipboard.writeText(textInput.current?.textContent ?? '')
     setTimeout(() => {
       setCopied(false)
     }, 2000)
@@ -63,7 +63,7 @@ const Pre = (props) => {
         </button>
       )}
 
-      <pre>{props.children}</pre>
+      <pre>{children}</pre>
     </div>
   )
 }
